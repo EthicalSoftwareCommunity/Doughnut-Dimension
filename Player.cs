@@ -9,26 +9,34 @@ public class Player : KinematicBody
     [Export] private NodePath joysticPath;
     private Joystic _joystic;
     private Vector3 speed = new (50,50,50);
-    private Vector3 direction = new Vector3();
+    private Vector3 direction = new Vector3(0,-1,0);
     private Vector3 _speed;
+    Spatial spatial = new Spatial();
+
+    private Vector3 _normal = new Vector3(0,1,0);
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         _joystic = GetNode<Joystic>(joysticPath);
+        AddChild(spatial);
     }
 
     public override void _PhysicsProcess(float delta)
     {
         var coll =   speed/5 *Transform.basis.z* delta* _joystic.GetButtonPosition().y;
-        
+        RotateObjectLocal(new Vector3(0,-1,0),Mathf.Deg2Rad(_joystic.GetButtonPosition().x)/50);
         //RotateZ(Mathf.Deg2Rad(_joystic.GetButtonPosition().x/100));
         if (GetSlideCount() != 0)
         {
+            _normal = GetSlideCollision(0).Normal;
             coll = coll.Normalized();
-            direction = coll - coll.Dot(GetSlideCollision(0).Normal) * GetSlideCollision(0).Normal;
+            direction = coll - coll.Dot(_normal) * _normal;
            // LookAt(coll.Cross(GetSlideCollision(0).Normal),Vector3.Up);
-            //RotateObjectLocal(new Vector3(0,0,1), GetSlideCollision(0).GetAngle(direction)-Mathf.Deg2Rad(90));s
-            LookAtFromPosition(Translation,Translation+direction, GetSlideCollision(0).Normal);
+            
+            //spatial.Translation = Translation;
+            //spatial.LookAt(spatial.Translation + direction, _normal);
+            //GlobalTransform.basis.Slerp(spatial.GlobalTransform.basis, 0.001f);
+            LookAt(Translation + direction, _normal);
             MoveAndSlide(direction);
             GD.Print("look");
             //RotateObjectLocal(Transform.basis.x.MoveToward(),coll.AngleTo(direction)/10);
@@ -68,10 +76,10 @@ public class Player : KinematicBody
     }
     /*private Vector3 UpdateDirectionPlayer() // Обновляет вектор движения игрока на основе нормали поверхности по которой он двигается
     {
-        var normal = GetFloorNormal();
+        var _normal = GetFloorNormal();
         var direction =  speed/10 * Vector3.Forward * _joystic.GetButtonPosition().y;;
         direction = direction.Normalized();
-        return direction - direction.Dot(normal) * normal;
+        return direction - direction.Dot(_normal) * _normal;
     }
  
     private void Move()
