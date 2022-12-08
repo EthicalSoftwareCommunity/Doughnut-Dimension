@@ -1,0 +1,134 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Player.cs" type="Script" id=1]
+[ext_resource path="res://default_env.tres" type="Environment" id=2]
+[ext_resource path="res://Joystic.cs" type="Script" id=3]
+[ext_resource path="res://Joystick/Radius.png" type="Texture" id=4]
+[ext_resource path="res://Joystick/Button.png" type="Texture" id=5]
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0.0627451, 0.905882, 1, 1 )
+metallic = 0.05
+metallic_specular = 0.91
+roughness_texture_channel = 3
+depth_enabled = true
+depth_scale = 0.5
+depth_deep_parallax = false
+depth_flip_tangent = false
+depth_flip_binormal = false
+
+[sub_resource type="SphereShape" id=5]
+margin = 0.001
+radius = 0.3
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.929412, 0.0156863, 0.0156863, 1 )
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.0431373, 0.964706, 0.431373, 1 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="CSGBox3" type="CSGBox" parent="."]
+transform = Transform( 2.13335, 0, 0, 0, 2.58117, -0.94324, 0, 1.13827, 2.13891, 7.273, -7.36268, 0.493728 )
+use_collision = true
+width = 1.461
+height = 0.78
+
+[node name="CSGBox3" type="CSGBox" parent="CSGBox3"]
+transform = Transform( 2.13335, 0, 0, 0, 2.58117, -0.94324, 0, 1.13827, 2.13891, 0.41973, 0.17647, -3.5184 )
+use_collision = true
+width = 1.461
+height = 0.78
+
+[node name="CSGTorus" type="CSGTorus" parent="."]
+transform = Transform( 2.13335, 0, 0, 0, 2.82101, 0, 0, 0, 2.33766, 0, 0, 0 )
+material_override = SubResource( 6 )
+use_collision = true
+invert_faces = true
+inner_radius = 0.727
+outer_radius = 5.811
+sides = 64
+ring_sides = 64
+smooth_faces = false
+
+[node name="CSGCylinder" type="CSGCylinder" parent="CSGTorus"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.003, 0, 0 )
+radius = 0.930488
+
+[node name="KinematicBody2" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.87338, -6.78047, 3.43974 )
+script = ExtResource( 1 )
+joysticPath = NodePath("../Sprite/Joystic")
+
+[node name="Camera" type="Camera" parent="KinematicBody2"]
+transform = Transform( 1, -2.23517e-08, -2.79397e-09, 6.93237e-12, 0.989262, 0.146152, 3.72529e-09, -0.146152, 0.989262, -4.76837e-07, 0.188001, 1.052 )
+environment = ExtResource( 2 )
+fov = 90.0
+size = 2.0
+near = 0.01
+
+[node name="CSGSphere" type="CSGSphere" parent="KinematicBody2"]
+transform = Transform( 1, 7.45058e-09, 0, 2.02516e-10, 1, -6.29696e-12, 0, 0, 1, 0, 0, 0 )
+radius = 0.3
+radial_segments = 24
+rings = 24
+
+[node name="CollisionShape" type="CollisionShape" parent="KinematicBody2"]
+transform = Transform( 1, 1.33014e-10, 7.45058e-09, -1.58593e-11, 1, 6.36646e-12, 0, 3.18323e-12, 1, 0, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="CSGBox" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.90901, 0, 0 )
+material_override = SubResource( 2 )
+width = 0.325275
+height = 0.403951
+depth = 0.536217
+
+[node name="CSGBox2" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.18119, 0, 0 )
+material_override = SubResource( 3 )
+width = 0.325275
+height = 0.403951
+depth = 0.536217
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( -0.00790077, -0.0318111, -0.999463, 0.00171772, 0.999492, -0.0318256, -0.999967, 0.00196825, 0.00784211, 1.66682, -1.30373, 2.19356 )
+visible = false
+light_color = Color( 0.396078, 1, 0.0196078, 1 )
+light_energy = 1.753
+light_specular = 9.159
+shadow_enabled = true
+shadow_bias = 1.0
+omni_range = 8.62945
+
+[node name="OmniLight2" type="OmniLight" parent="."]
+transform = Transform( -0.998967, 0.0303111, 0.0338568, 0.0296354, 0.999355, -0.0202856, -0.0344498, -0.0192613, -0.999221, -1.55787, 4.56574, -8.58323 )
+light_color = Color( 0.0196078, 0.380392, 1, 1 )
+light_energy = 0.5
+light_indirect_energy = 16.0
+light_size = 0.224
+light_specular = 16.0
+light_bake_mode = 2
+shadow_enabled = true
+shadow_bias = 1.713
+shadow_reverse_cull_face = true
+omni_range = 8.62945
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 134, 473 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 4 )
+
+[node name="Joystic" type="TouchScreenButton" parent="Sprite"]
+position = Vector2( -26, -28 )
+normal = ExtResource( 5 )
+script = ExtResource( 3 )
+
+[node name="Control" type="Control" parent="."]
+margin_left = 46.0
+margin_top = 389.0
+margin_right = 216.0
+margin_bottom = 559.0
+
+[connection signal="gui_input" from="Control" to="Sprite/Joystic" method="_on_Control_gui_input"]

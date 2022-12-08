@@ -11,11 +11,20 @@ config_version=4
 [application]
 
 config/name="1233"
+run/main_scene="res://Spatial.tscn"
 config/icon="res://icon.png"
+
+[debug]
+
+settings/stdout/print_fps=true
 
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
 
 [mono]
 
@@ -24,6 +33,8 @@ project/assembly_name="1233"
 [physics]
 
 common/enable_pause_aware_picking=true
+3d/physics_engine="GodotPhysics"
+3d/active_soft_world=false
 
 [rendering]
 

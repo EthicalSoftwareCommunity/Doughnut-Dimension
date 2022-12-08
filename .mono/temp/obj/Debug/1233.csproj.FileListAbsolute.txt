@@ -1,0 +1,9 @@
+C:\PROGECTS\Doughnut-Dimension\.mono\temp\bin\Debug\1233.dll
+C:\PROGECTS\Doughnut-Dimension\.mono\temp\bin\Debug\1233.pdb
+C:\PROGECTS\Doughnut-Dimension\.mono\temp\obj\Debug\1233.csproj.AssemblyReference.cache
+C:\PROGECTS\Doughnut-Dimension\.mono\temp\obj\Debug\1233.GeneratedMSBuildEditorConfig.editorconfig
+C:\PROGECTS\Doughnut-Dimension\.mono\temp\obj\Debug\1233.AssemblyInfoInputs.cache
+C:\PROGECTS\Doughnut-Dimension\.mono\temp\obj\Debug\1233.AssemblyInfo.cs
+C:\PROGECTS\Doughnut-Dimension\.mono\temp\obj\Debug\1233.csproj.CoreCompileInputs.cache
+C:\PROGECTS\Doughnut-Dimension\.mono\temp\obj\Debug\1233.dll
+C:\PROGECTS\Doughnut-Dimension\.mono\temp\obj\Debug\1233.pdb
