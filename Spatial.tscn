@@ -17,9 +17,8 @@ depth_deep_parallax = false
 depth_flip_tangent = false
 depth_flip_binormal = false
 
-[sub_resource type="SphereShape" id=5]
-margin = 0.001
-radius = 0.3
+[sub_resource type="BoxShape" id=7]
+extents = Vector3( 0.5, 0.5, 0.5 )
 
 [sub_resource type="SpatialMaterial" id=2]
 albedo_color = Color( 0.929412, 0.0156863, 0.0156863, 1 )
@@ -41,6 +40,11 @@ use_collision = true
 width = 1.461
 height = 0.78
 
+[node name="CSGTorus" type="CSGTorus" parent="CSGBox3"]
+transform = Transform( -3.54886e-08, -1.306, 0, 0.811885, -5.70869e-08, 0, 2.98023e-08, -1.77636e-15, 0.961619, 9.28022, 2.32561, -1.23763 )
+sides = 64
+ring_sides = 64
+
 [node name="CSGTorus" type="CSGTorus" parent="."]
 transform = Transform( 2.13335, 0, 0, 0, 2.82101, 0, 0, 0, 2.33766, 0, 0, 0 )
 material_override = SubResource( 6 )
@@ -57,36 +61,29 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.003, 0, 0 )
 radius = 0.930488
 
 [node name="KinematicBody2" type="KinematicBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.87338, -6.78047, 3.43974 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.06177, -6.13465, 2.97183 )
 script = ExtResource( 1 )
 joysticPath = NodePath("../Sprite/Joystic")
 
-[node name="Camera" type="Camera" parent="KinematicBody2"]
-transform = Transform( 1, -2.23517e-08, -2.79397e-09, 6.93237e-12, 0.989262, 0.146152, 3.72529e-09, -0.146152, 0.989262, -4.76837e-07, 0.188001, 1.052 )
-environment = ExtResource( 2 )
-fov = 90.0
-size = 2.0
-near = 0.01
-
-[node name="CSGSphere" type="CSGSphere" parent="KinematicBody2"]
+[node name="CSGSphere" type="CSGBox" parent="KinematicBody2"]
 transform = Transform( 1, 7.45058e-09, 0, 2.02516e-10, 1, -6.29696e-12, 0, 0, 1, 0, 0, 0 )
-radius = 0.3
-radial_segments = 24
-rings = 24
+width = 1.0
+height = 1.0
+depth = 1.0
 
 [node name="CollisionShape" type="CollisionShape" parent="KinematicBody2"]
 transform = Transform( 1, 1.33014e-10, 7.45058e-09, -1.58593e-11, 1, 6.36646e-12, 0, 3.18323e-12, 1, 0, 0, 0 )
-shape = SubResource( 5 )
+shape = SubResource( 7 )
 
 [node name="CSGBox" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.90901, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.268, -3.32718, -1.36893 )
 material_override = SubResource( 2 )
 width = 0.325275
 height = 0.403951
 depth = 0.536217
 
 [node name="CSGBox2" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.18119, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.094, 3.71637, 0 )
 material_override = SubResource( 3 )
 width = 0.325275
 height = 0.403951
@@ -130,5 +127,27 @@ margin_left = 46.0
 margin_top = 389.0
 margin_right = 216.0
 margin_bottom = 559.0
+
+[node name="CSGBox4" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.268, -2.4239, -2.58643 )
+material_override = SubResource( 2 )
+width = 0.325275
+height = 0.403951
+depth = 0.536217
+
+[node name="CSGBox5" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.268, -1.24426, -3.36192 )
+material_override = SubResource( 2 )
+width = 0.325275
+height = 0.403951
+depth = 0.536217
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.956687, 0.0425477, -0.287994, 6.93237e-12, 0.989262, 0.146152, 0.29112, -0.139822, 0.946414, -5.61975, 0.205648, 12.6177 )
+environment = ExtResource( 2 )
+fov = 90.0
+size = 2.0
+near = 0.01
+far = 245.9
 
 [connection signal="gui_input" from="Control" to="Sprite/Joystic" method="_on_Control_gui_input"]

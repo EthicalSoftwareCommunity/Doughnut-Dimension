@@ -9,7 +9,7 @@ public class Player : KinematicBody
     [Export] private NodePath joysticPath;
     private Joystic _joystic;
     private Vector3 speed = new (50,50,50);
-
+    private Vector3 direction = new Vector3();
     private Vector3 _speed;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -19,22 +19,24 @@ public class Player : KinematicBody
 
     public override void _PhysicsProcess(float delta)
     {
-        var coll =   speed/10 *Transform.basis.z* delta* _joystic.GetButtonPosition().y;
+        var coll =   speed/5 *Transform.basis.z* delta* _joystic.GetButtonPosition().y;
         
         //RotateZ(Mathf.Deg2Rad(_joystic.GetButtonPosition().x/100));
-
         if (GetSlideCount() != 0)
         {
             coll = coll.Normalized();
-            var direction = coll - coll.Dot(GetSlideCollision(0).Normal) * GetSlideCollision(0).Normal;
+            direction = coll - coll.Dot(GetSlideCollision(0).Normal) * GetSlideCollision(0).Normal;
            // LookAt(coll.Cross(GetSlideCollision(0).Normal),Vector3.Up);
             //RotateObjectLocal(new Vector3(0,0,1), GetSlideCollision(0).GetAngle(direction)-Mathf.Deg2Rad(90));s
-            MoveAndSlideWithSnap(direction.MoveToward(0.1f), Vector3.Down);
-            RotateObjectLocal(Transform.basis.x.MoveToward(),coll.AngleTo(direction)/10);
+            LookAtFromPosition(Translation,Translation+direction, GetSlideCollision(0).Normal);
+            MoveAndSlide(direction);
+            GD.Print("look");
+            //RotateObjectLocal(Transform.basis.x.MoveToward(),coll.AngleTo(direction)/10);
         }
         else
         {
             MoveAndSlide(coll);
+            //LookAtFromPosition(Translation,Translation+direction, Transform.basis.z);
         }
         
 
