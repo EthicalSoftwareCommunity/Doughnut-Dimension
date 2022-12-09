@@ -1,10 +1,6 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Player.cs" type="Script" id=1]
 [ext_resource path="res://default_env.tres" type="Environment" id=2]
-[ext_resource path="res://Joystic.cs" type="Script" id=3]
-[ext_resource path="res://Joystick/Radius.png" type="Texture" id=4]
-[ext_resource path="res://Joystick/Button.png" type="Texture" id=5]
 
 [sub_resource type="SpatialMaterial" id=6]
 albedo_color = Color( 0.0627451, 0.905882, 1, 1 )
@@ -26,9 +22,6 @@ albedo_color = Color( 0.929412, 0.0156863, 0.0156863, 1 )
 [sub_resource type="SpatialMaterial" id=3]
 albedo_color = Color( 0.0431373, 0.964706, 0.431373, 1 )
 
-[sub_resource type="SphereShape" id=8]
-radius = 14.3656
-
 [node name="Spatial" type="Spatial"]
 
 [node name="CSGTorus" type="CSGTorus" parent="."]
@@ -48,8 +41,6 @@ radius = 0.930488
 
 [node name="KinematicBody2" type="KinematicBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3809, -0.796476, 1.8101 )
-script = ExtResource( 1 )
-joysticPath = NodePath("../Sprite/Joystic")
 
 [node name="Camera" type="Camera" parent="KinematicBody2"]
 transform = Transform( 1, -2.23517e-08, -2.79397e-09, 6.93237e-12, 0.989262, 0.146152, 3.72529e-09, -0.146152, 0.989262, -4.76837e-07, 0.188001, 1.052 )
@@ -70,14 +61,15 @@ transform = Transform( 1, 1.33014e-10, 7.45058e-09, -1.58593e-11, 1, 6.36646e-12
 shape = SubResource( 7 )
 
 [node name="CSGBox" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.2815, -3.32718, -1.36893 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.61157, -6.55496, 7.07545 )
 material_override = SubResource( 2 )
+use_collision = true
 width = 0.325275
 height = 0.403951
 depth = 0.536217
 
 [node name="CSGBox2" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.1075, 3.71637, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.33421, 3.71637, 10.9852 )
 material_override = SubResource( 3 )
 width = 0.325275
 height = 0.403951
@@ -85,7 +77,6 @@ depth = 0.536217
 
 [node name="OmniLight" type="OmniLight" parent="."]
 transform = Transform( -0.00790077, -0.0318111, -0.999463, 0.00171772, 0.999492, -0.0318256, -0.999967, 0.00196825, 0.00784211, 1.66682, -1.30373, 2.19356 )
-visible = false
 light_color = Color( 0.396078, 1, 0.0196078, 1 )
 light_energy = 1.753
 light_specular = 9.159
@@ -109,12 +100,9 @@ omni_range = 8.62945
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 134, 473 )
 scale = Vector2( 1.5, 1.5 )
-texture = ExtResource( 4 )
 
 [node name="Joystic" type="TouchScreenButton" parent="Sprite"]
 position = Vector2( -26, -28 )
-normal = ExtResource( 5 )
-script = ExtResource( 3 )
 
 [node name="Control" type="Control" parent="."]
 margin_left = 46.0
@@ -124,6 +112,7 @@ margin_bottom = 559.0
 
 [node name="CSGBox4" type="CSGBox" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.2815, -2.4239, -2.58643 )
+visible = false
 material_override = SubResource( 2 )
 width = 0.325275
 height = 0.403951
@@ -131,6 +120,7 @@ depth = 0.536217
 
 [node name="CSGBox5" type="CSGBox" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.2815, -1.24426, -3.36192 )
+visible = false
 material_override = SubResource( 2 )
 width = 0.325275
 height = 0.403951
@@ -138,6 +128,7 @@ depth = 0.536217
 
 [node name="CSGBox3" type="CSGBox" parent="."]
 transform = Transform( 2.13335, 0, 0, 0, 2.58117, -0.94324, 0, 1.13827, 2.13891, 16.8801, -7.36268, 0.493728 )
+visible = false
 use_collision = true
 width = 0.57
 height = 0.19
@@ -145,6 +136,7 @@ depth = 2.34
 
 [node name="CSGBox6" type="CSGBox" parent="."]
 transform = Transform( 2.13335, 0, 0, 0, 1.54246, -1.95727, 0, 2.36198, 1.27817, 16.8801, -4.53762, -2.98713 )
+visible = false
 use_collision = true
 width = 0.57
 height = 0.19
@@ -152,6 +144,7 @@ depth = 2.34
 
 [node name="CSGBox7" type="CSGBox" parent="."]
 transform = Transform( 2.13335, 0, 0, 0, 0.498347, -2.30089, 0, 2.77664, 0.412958, 16.8801, -0.516658, -4.84159 )
+visible = false
 use_collision = true
 width = 0.57
 height = 0.19
@@ -159,6 +152,7 @@ depth = 2.34
 
 [node name="CSGBox8" type="CSGBox" parent="."]
 transform = Transform( 2.13335, 0, 0, 0, -1.09691, -2.1537, 0, 2.59902, -0.908963, 16.8801, 3.94867, -4.44379 )
+visible = false
 use_collision = true
 width = 0.57
 height = 0.19
@@ -166,6 +160,7 @@ depth = 2.34
 
 [node name="CSGBox9" type="CSGBox" parent="."]
 transform = Transform( 2.13335, 0, 0, 0, -1.81569, -1.78909, 0, 2.15902, -1.50459, 16.8801, 6.89783, -2.46293 )
+visible = false
 use_collision = true
 width = 0.57
 height = 0.19
@@ -173,6 +168,7 @@ depth = 2.34
 
 [node name="CSGBox10" type="CSGBox" parent="."]
 transform = Transform( 2.13335, 0, 0, 0, -2.69947, -0.678779, 0, 0.819132, -2.23694, 16.8801, 9.44806, 1.22403 )
+visible = false
 use_collision = true
 width = 0.57
 height = 0.19
@@ -180,6 +176,7 @@ depth = 2.34
 
 [node name="CSGBox11" type="CSGBox" parent="."]
 transform = Transform( 2.13335, 0, 0, 0, -2.80508, 0.248046, 0, -0.299331, -2.32446, 16.8801, 10.102, 5.60347 )
+visible = false
 use_collision = true
 width = 0.57
 height = 0.19
@@ -187,6 +184,7 @@ depth = 2.34
 
 [node name="CSGBox12" type="CSGBox" parent="."]
 transform = Transform( 2.13335, 0, 0, 0, -2.18774, 1.47582, 0, -1.78098, -1.81289, 16.8801, 8.46943, 9.77863 )
+visible = false
 use_collision = true
 width = 0.57
 height = 0.19
@@ -194,6 +192,7 @@ depth = 2.34
 
 [node name="CSGBox13" type="CSGBox" parent="."]
 transform = Transform( 2.13335, 0, 0, 0, -2.62616, 0.853718, 0, -1.03024, -2.17619, 16.8801, 9.17435, 8.17004 )
+visible = false
 use_collision = true
 width = 0.57
 height = 0.19
@@ -201,6 +200,7 @@ depth = 2.34
 
 [node name="CSGBox14" type="CSGBox" parent="."]
 transform = Transform( 2.13335, 0, 0, 0, -1.63909, 1.90258, 0, -2.29597, -1.35825, 16.8801, 6.49608, 11.7651 )
+visible = false
 use_collision = true
 width = 0.57
 height = 0.19
@@ -208,6 +208,7 @@ depth = 2.34
 
 [node name="CSGBox15" type="CSGBox" parent="."]
 transform = Transform( 2.13335, 0, 0, 0, -0.613078, 2.28178, 0, -2.75359, -0.508031, 16.8801, 2.5555, 13.7847 )
+visible = false
 use_collision = true
 width = 0.57
 height = 0.19
@@ -215,6 +216,7 @@ depth = 2.34
 
 [node name="CSGBox16" type="CSGBox" parent="."]
 transform = Transform( 2.13335, 0, 0, 0, 0.988169, 2.18955, 0, -2.64228, 0.818857, 16.8801, -1.92249, 13.5724 )
+visible = false
 use_collision = true
 width = 0.57
 height = 0.19
@@ -222,6 +224,7 @@ depth = 2.34
 
 [node name="CSGBox17" type="CSGBox" parent="."]
 transform = Transform( 2.13335, 0, 0, 0, 1.72458, 1.84996, 0, -2.23247, 1.42909, 16.8801, -4.95126, 11.7156 )
+visible = false
 use_collision = true
 width = 0.57
 height = 0.19
@@ -229,6 +232,7 @@ depth = 2.34
 
 [node name="CSGBox18" type="CSGBox" parent="."]
 transform = Transform( 2.13335, 0, 0, 0, 2.66317, 0.770971, 0, -0.930386, 2.20686, 16.8801, -7.65222, 8.13758 )
+visible = false
 use_collision = true
 width = 0.57
 height = 0.19
@@ -236,6 +240,7 @@ depth = 2.34
 
 [node name="CSGBox19" type="CSGBox" parent="."]
 transform = Transform( 2.13335, 0, 0, 0, 2.81509, -0.151426, 0, 0.182734, 2.33275, 16.8801, -8.48726, 3.78904 )
+visible = false
 use_collision = true
 width = 0.57
 height = 0.19
@@ -243,16 +248,10 @@ depth = 2.34
 
 [node name="CSGBox20" type="CSGBox" parent="."]
 transform = Transform( 2.13335, 0, 0, 0, 2.25973, -1.39937, 0, 1.68871, 1.87254, 16.8801, -7.02923, -0.450243 )
+visible = false
 use_collision = true
 width = 0.57
 height = 0.19
 depth = 2.34
-
-[node name="Area" type="Area" parent="."]
-gravity_point = true
-gravity_distance_scale = 454.2
-
-[node name="CollisionShape" type="CollisionShape" parent="Area"]
-shape = SubResource( 8 )
 
 [connection signal="gui_input" from="Control" to="Sprite/Joystic" method="_on_Control_gui_input"]
