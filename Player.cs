@@ -36,9 +36,16 @@ public class Player : KinematicBody
             //spatial.Translation = Translation;
             //spatial.LookAt(spatial.Translation + direction, _normal);
             //GlobalTransform.basis.Slerp(spatial.GlobalTransform.basis, 0.001f);
-            LookAt(Translation + direction, _normal);
             MoveAndSlide(direction);
-            GD.Print("look");
+            if (direction.AngleTo(-Transform.basis.z)>=Mathf.Deg2Rad(90))
+            {
+                LookAt(Translation + direction*-1, _normal);
+            }
+            else
+            {
+                LookAt(Translation + direction, _normal);
+            }
+           // GD.Print("look");
             //RotateObjectLocal(Transform.basis.x.MoveToward(),coll.AngleTo(direction)/10);
         }
         else

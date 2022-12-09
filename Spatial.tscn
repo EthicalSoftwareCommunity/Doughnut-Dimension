@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Player.cs" type="Script" id=1]
 [ext_resource path="res://default_env.tres" type="Environment" id=2]
@@ -26,6 +26,9 @@ albedo_color = Color( 0.929412, 0.0156863, 0.0156863, 1 )
 [sub_resource type="SpatialMaterial" id=3]
 albedo_color = Color( 0.0431373, 0.964706, 0.431373, 1 )
 
+[sub_resource type="SphereShape" id=8]
+radius = 14.3656
+
 [node name="Spatial" type="Spatial"]
 
 [node name="CSGTorus" type="CSGTorus" parent="."]
@@ -44,7 +47,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.003, 0, 0 )
 radius = 0.930488
 
 [node name="KinematicBody2" type="KinematicBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.38192, -6.15553, 2.97183 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3809, -0.796476, 1.8101 )
 script = ExtResource( 1 )
 joysticPath = NodePath("../Sprite/Joystic")
 
@@ -244,5 +247,12 @@ use_collision = true
 width = 0.57
 height = 0.19
 depth = 2.34
+
+[node name="Area" type="Area" parent="."]
+gravity_point = true
+gravity_distance_scale = 454.2
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+shape = SubResource( 8 )
 
 [connection signal="gui_input" from="Control" to="Sprite/Joystic" method="_on_Control_gui_input"]
